@@ -1,55 +1,63 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-
-
-//class TreeNode {
-//    int val;
-//    TreeNode left;
-//    TreeNode right;
-//
-//    TreeNode(int x) {
-//        val = x;
-//        left = null;
-//        right = null;
-//    }
-//}
+import java.util.Arrays;
+import java.util.List;
 
 public class Test {
-    Queue<Integer> queue = new LinkedList<>();
-    public ArrayList<Integer> solve(TreeNode A) {
-        ArrayList<Integer> result = levelOrderTraversal(A);
-        return result;
-    }
-
-    private ArrayList<Integer> levelOrderTraversal(TreeNode root) {
-        if(root == null) {
-            return null;
-        }
-        if(root.left == null && root.right == null) {
-            queue.add(root.val);
-        }
-        levelOrderTraversal(root.left);
-        levelOrderTraversal(root.right);
-
-        ArrayList<Integer> out = new ArrayList<>();
-        while(!queue.isEmpty()){
-            out.add(queue.poll());
-        }
-        return out;
-    }
-
     public static void main(String[] args) {
-        BinarySearchTreeInput bstInput = new BinarySearchTreeInput();
-        int[] values = {4, 2, 6, 1, 3, 5, 7};
-        TreeNode root = bstInput.buildBST(values);
+        int n = 16777214;
+        Test test = new Test(); 
+        int[] result = test.primesum(n);
+        System.out.println(Arrays.toString(result));
+    }
 
-//        Test t = new Test();
-//        ArrayList<Integer> result = t.solve(root);
-//        System.out.println();
-//        for(int i=0; i<result.size(); i++) {
-//            System.out.print(result.get(i) + " ");
-//        }
-//        System.out.println();
+    public int[] primesum(int n) {
+        int[] primes = getAllPrimes(n);
+        int i=0, j=primes.length-1;
+        while(i<j) {
+            int sum = primes[i] + primes[j];
+            if(sum == n) {
+                return new int[]{primes[i], primes[j]};
+            } else if(sum < n) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+        for(int ik=0; ik<primes.length; ik++){
+            if(primes[ik] * 2 == n){
+                return new int[]{primes[ik], primes[ik] };
+            }
+        }
+        return new int[]{-1};
+    }
+
+    private int[] getAllPrimes(int n) {
+        boolean[] prime = new boolean[n+1];
+        Arrays.fill(prime, true);
+        if(n>1){
+            prime[0] = false;
+            prime[1] = false;
+            int k=0;
+            for (int i = 2; i * i <= n; i++) {
+                if (prime[i]) {
+                    for (int j = i * i; j <= n; j += i) {
+                        prime[j] = false;
+                    }
+                }
+            }
+            List<Integer> list = new ArrayList<>();
+            for(int iv=0; iv<prime.length; iv++) {
+                if(prime[iv]) {
+                    list.add(iv);
+                }
+            }
+            int[] result = new int[list.size()];
+            for(int i=0; i<list.size(); i++) {
+                result[i] = list.get(i);
+            }
+            return result;
+        }
+        return new int[]{-1};
+        
     }
 }
