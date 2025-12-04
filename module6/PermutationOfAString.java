@@ -15,7 +15,6 @@ public class PermutationOfAString {
 
     private static void backtrack(String str, int idx, char[] ans, boolean[] visited, List<String> strings) {
         if(idx == str.length()) {
-            // System.out.println("Ans: " + ans.toString());
             for(int i=0; i<ans.length; i++){
                 System.out.print(ans[i]);
             }
