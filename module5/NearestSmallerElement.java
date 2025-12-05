@@ -5,11 +5,6 @@ import java.util.Stack;
 public class NearestSmallerElement {
     public static void main(String[] args) {
         int[] x = new int[]{39,27,11,4,24,32,32,1};
-        //{8,23,22,16,22,7,7,27,35,27,32,20,5,1,35,28,20,6,16,26,48,34}
-        // {4, 5, 2, 10, 8};
-        //{34,35,27,42,5,28,389,20,28};
-        // expected: -1 34 -1 27 -1 5 28 5 20 
-        // myoutput: -1 34 -1 27 -1 5 5 5 5 
         ArrayList<Integer> arr = new ArrayList<>();
         for(int i=0; i<x.length; i++) {
             arr.add(x[i]);
@@ -19,8 +14,8 @@ public class NearestSmallerElement {
             System.out.print(result.get(i)+ " ");
         }
         System.out.println();
-     }
-     //42,5,28,39,20,28
+    }
+
     private static List<Integer> findNearestClosestElement(ArrayList<Integer> arr) {
         Stack<Integer> stack = new Stack<>();
         ArrayList<Integer> result = new ArrayList<>();
